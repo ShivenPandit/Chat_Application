@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-Time Chat Application</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Login Screen -->
+    <div id="loginScreen" class="login-screen">
+        <div class="login-container">
+            <div class="logo">
+                <h1>💬 ChatApp</h1>
+                <p>Connect and chat in real-time</p>
+            </div>
+            <form id="loginForm" class="login-form">
+                <div class="input-group">
+                    <input type="text" id="usernameInput" placeholder="Enter your username" required>
+                    <span class="input-error" id="usernameError"></span>
+                </div>
+                <button type="submit" class="btn-primary">Join Chat</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Main Chat Interface -->
+    <div id="chatInterface" class="chat-interface hidden">
+        <div class="chat-container">
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <div class="user-profile">
+                    <div class="user-avatar">
+                        <span id="userInitial">U</span>
+                    </div>
+                    <div class="user-info">
+                        <span id="currentUsername">Username</span>
+                        <span class="user-status online">Online</span>
+                    </div>
+                    <button id="logoutBtn" class="logout-btn">🚪</button>
+                </div>
+
+                <div class="rooms-section">
+                    <div class="section-header">
+                        <h3>Chat Rooms</h3>
+                        <button id="createRoomBtn" class="create-room-btn">+</button>
+                    </div>
+                    <ul id="roomsList" class="rooms-list">
+                        <!-- Rooms will be populated dynamically -->
+                    </ul>
+                </div>
+
+                <div class="online-users">
+                    <h4>Online Users</h4>
+                    <ul id="usersList" class="users-list">
+                        <!-- Online users will be populated dynamically -->
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Main Chat Area -->
+            <div class="main-chat">
+                <div class="chat-header">
+                    <h2 id="currentRoomName">Select a room to start chatting</h2>
+                    <div class="room-info">
+                        <span id="roomUserCount">0 users</span>
+                    </div>
+                </div>
+
+                <div id="messagesContainer" class="messages-container">
+                    <div class="welcome-message">
+                        <h3>Welcome to ChatApp! 👋</h3>
+                        <p>Select a room from the sidebar or create a new one to start chatting.</p>
+                    </div>
+                </div>
+
+                <div class="message-input-container">
+                    <div class="message-input-wrapper">
+                        <div class="formatting-toolbar">
+                            <button type="button" class="format-btn" data-format="bold" title="Bold">
+                                <strong>B</strong>
+                            </button>
+                            <button type="button" class="format-btn" data-format="italic" title="Italic">
+                                <em>I</em>
+                            </button>
+                            <button type="button" class="format-btn" data-format="underline" title="Underline">
+                                <u>U</u>
+                            </button>
+                        </div>
+                        <div class="input-wrapper">
+                            <textarea 
+                                id="messageInput" 
+                                placeholder="Type your message... (Press Enter to send, Shift+Enter for new line)"
+                                disabled
+                            ></textarea>
+                            <button id="sendBtn" class="send-btn" disabled>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 2L11 13"></path>
+                                    <path d="M22 2L15 22L11 13L2 9L22 2Z"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Create Room Modal -->
+    <div id="createRoomModal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Create New Room</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <form id="createRoomForm" class="modal-form">
+                <div class="input-group">
+                    <label for="roomNameInput">Room Name</label>
+                    <input type="text" id="roomNameInput" placeholder="Enter room name" required>
+                    <span class="input-error" id="roomNameError"></span>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn-secondary" id="cancelCreateRoom">Cancel</button>
+                    <button type="submit" class="btn-primary">Create Room</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Notification Container -->
+    <div id="notificationContainer" class="notification-container"></div>
+
+    <!-- Connection Status -->
+    <div id="connectionStatus" class="connection-status">
+        <span class="status-indicator"></span>
+        <span class="status-text">Connecting...</span>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
